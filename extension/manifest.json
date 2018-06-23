@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+
+  "name": "Flutter documentation",
+  "description": "Searches the selected o right clicked word in docs.flutter.io",
+  "version": "1.0.1",
+  
+  "background": {
+    "scripts": ["flutter_doc.js"]
+  },
+  
+  "icons": {
+    "192":"flutter_doc_192.png"
+  },
+
+  "permissions": [
+    "tabs", "storage", "contextMenus"
+  ],
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["all_urls.js"]
+    },
+    {
+      "matches": ["https://docs.flutter.io/*"],
+      "js": ["docs_flutter_io.js"]
+    }
+  ]
+}
