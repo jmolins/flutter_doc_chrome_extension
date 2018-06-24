@@ -27,24 +27,30 @@ function onClickSelected(info, tab) {
 function openFlutterDocs(search_string, tab) {
 
 	chrome.storage.local.set({'search_string': search_string}, function (result) {});
-	
+
 	var url = "https://docs.flutter.io/?search=" + search_string;
 	
   // reset string for next search
 	init();
 
-  if (targetTabId) {
-	  chrome.tabs.get(targetTabId, function (existingTab) {
-	    if (existingTab) {
-			  chrome.tabs.update(targetTabId, {url: url, active: true});
-	    } else {
-			  chrome.tabs.create({ url: url, index: targetTabId} );
-	    }
-	  });
-  }
-  else {
-    chrome.tabs.create({ url: url, index: tab.index + 1}, function (newTab) {targetTabId = newTab.id;});
-  }
+	chrome.storage.local.get(['openInSameTab'], function(items) {
+		
+		// By default true (when 'openInSameTab' is no in the storage)
+		var openInSameTab = items.openInSameTab == 'no' ? false : true;
+
+		if (openInSameTab && targetTabId) {
+			chrome.tabs.get(targetTabId, function (existingTab) {
+				if (existingTab) {
+					chrome.tabs.update(targetTabId, {url: url, active: true});
+				} else {
+					chrome.tabs.create({ url: url, index: targetTabId} );
+				}
+			});
+		}
+		else {
+			chrome.tabs.create({ url: url, index: tab.index + 1}, function (newTab) {targetTabId = newTab.id;});
+		}
+  });
 }
 
 init();
