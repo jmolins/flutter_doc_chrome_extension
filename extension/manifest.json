@@ -3,7 +3,7 @@
 
   "name": "Flutter documentation",
   "description": "Searches the selected o right clicked word in docs.flutter.io",
-  "version": "1.0.3",
+  "version": "1.1",
   
   "background": {
     "scripts": ["flutter_doc.js"]
@@ -20,7 +20,8 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["all_urls.js"]
+      "js": ["all_urls.js"],
+      "all_frames": true
     },
     {
       "matches": ["https://docs.flutter.io/*"],
