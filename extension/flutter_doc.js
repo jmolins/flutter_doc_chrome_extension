@@ -26,6 +26,8 @@ function onClickSelected(info, tab) {
 
 function openFlutterDocs(search_string, tab) {
 
+	chrome.storage.local.set({'search_string': search_string}, function (result) {});
+	
 	var url = "https://docs.flutter.io/?search=" + search_string;
 	
   // reset string for next search
