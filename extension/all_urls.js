@@ -5,7 +5,7 @@ document.addEventListener('mouseup', function(event)
   if (selection.length) {
     selection = selection.trim();
   } else
-	  selection = null;
+    selection = null;
 
   var hovered = getWordAtPoint(event.clientX, event.clientY);
 
