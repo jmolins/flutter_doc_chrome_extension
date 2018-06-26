@@ -1,7 +1,7 @@
-document.addEventListener('mouseup', function(event)
+document.addEventListener('contextmenu', function(event)
 {
   var selection = window.getSelection().toString();
-
+  
   if (selection.length) {
     selection = selection.trim();
   } else
